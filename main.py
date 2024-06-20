@@ -1,13 +1,18 @@
-from exercicios.exer003 import Funcionario
+from exercicios.exer004 import Produto
 
 # Arquivo criado para testar a funcionalidade das classes
 
-func_matheus = Funcionario(nome='Matheus', salario=1000)
+prod1 = Produto(nome='PlayStation 5', preco=3699)
+prod2 = Produto(nome='Cadeira Gamer', preco=1199)
 
-print(func_matheus.salario)
-func_matheus.salario = -1000
+prod1.preco = '3200'
+prod2.nome = ''
 
-print(func_matheus.salario)
+print(prod1.preco)
+print(prod2.nome)
 
-func_matheus.salario = 2500
-print(func_matheus.salario)    # Novo salário
+prod1.preco = 3270
+prod2.nome = 'Nintendo Switch'
+
+print(prod1.preco)
+print(prod2.nome)
