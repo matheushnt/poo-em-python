@@ -1,50 +1,32 @@
 import unittest
-from exercicios.exer009 import Funcionario, Gerente
+from exercicios.exer010 import Empresa, Funcionario
 
 
-class TesteFuncionario(unittest.TestCase):
+class TestEmpresa(unittest.TestCase):
     def setUp(self):
-        self.funcionario = Funcionario('Ana', 3000)
+        self.empresa = Empresa('Math Motors')
+        self.func1 = Funcionario('Ana')
+        self.func2 = Funcionario('Bob')
 
-    def test_acessar_nome_funcionario(self):
-        self.assertEqual(self.funcionario.nome, 'Ana')
+    def test_adicionar_funcionario(self):
+        self.empresa.adicionar_funcionario(self.func1)
+        self.assertIn('Ana', self.empresa.listar_funcionarios())
 
-    def test_acessar_salario_funcionario(self):
-        self.assertEqual(self.funcionario.salario, 3000)
+    def test_nao_adicionar_funcionario_nao_instanciado(self):
+        self.empresa.adicionar_funcionario('Carlos')
+        self.assertNotIn('Carlos', self.empresa.listar_funcionarios())
 
-    def test_alterar_nome_funcionario(self):
-        self.funcionario.nome = 'Beatriz'
-        self.assertEqual(self.funcionario.nome, 'Beatriz')
+    def test_remover_funcionario(self):
+        self.empresa.adicionar_funcionario(self.func1)
+        self.empresa.adicionar_funcionario(self.func2)
+        self.empresa.remover_funcionario('Bob')
+        self.assertIn('Ana', self.empresa.listar_funcionarios())
+        self.assertNotIn('Bob', self.empresa.listar_funcionarios())
 
-    def test_alterar_salario_funcionario(self):
-        self.funcionario.salario = 5000
-        self.assertEqual(self.funcionario.salario, 5000)
-
-
-class TesteGerente(unittest.TestCase):
-    def setUp(self):
-        self.gerente = Gerente('Eduardo', 5750, 1200)
-
-    def test_acessar_nome_gerente(self):
-        self.assertEqual(self.gerente.nome, 'Eduardo')
-
-    def test_acessar_salario_gerente(self):
-        self.assertEqual(self.gerente.salario, 5750)
-
-    def test_acessar_bonus_gerente(self):
-        self.assertEqual(self.gerente.bonus, 1200)
-
-    def test_alterar_nome_gerente(self):
-        self.gerente.nome = 'Thiago'
-        self.assertEqual(self.gerente.nome, 'Thiago')
-
-    def test_alterar_salario_gerente(self):
-        self.gerente.salario = 6000
-        self.assertEqual(self.gerente.salario, 6000)
-
-    def test_alterar_bonus_gerente(self):
-        self.gerente.bonus = 1350
-        self.assertEqual(self.gerente.bonus, 1350)
+    def test_listar_funcionarios(self):
+        self.empresa.adicionar_funcionario(self.func1)
+        self.empresa.adicionar_funcionario(self.func2)
+        self.assertEqual(['Ana', 'Bob'], self.empresa.listar_funcionarios())
 
 
 if __name__ == '__main__':
