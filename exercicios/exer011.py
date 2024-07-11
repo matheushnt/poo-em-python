@@ -1,27 +1,34 @@
 class Funcionario:
-    def __init__(self, nome, salario, percentual):
-        self._nome = nome
-        self._salario = salario
-        self._percentual = percentual
-
-    def _calcular_bonus(self):
-        return self._salario * (self._percentual / 100)
+    def __init__(self, nome, idade, salario):
+        self.nome = nome
+        self.idade = idade
+        self.salario = salario
 
     def exibir_detalhes(self):
-        print('Nome: {}, Salário: R${:.2f}, Bônus: R${:.2f}'
-              .format(self._nome, self._salario, self._calcular_bonus()))
+        return f'Nome: {self.nome}, Idade: {self.idade} anos, Salário: R${self.salario:.2f}'
 
 
 class Gerente(Funcionario):
-    def __init__(self, nome, salario):
-        super().__init__(nome, salario, 15)
+    def __init__(self, nome, idade, salario, departamento):
+        super().__init__(nome, idade, salario)
+        self.departamento = departamento
+
+    def calcular_bonus(self):
+        return self.salario * 0.20
 
 
 class Desenvolvedor(Funcionario):
-    def __init__(self, nome, salario):
-        super().__init__(nome, salario, 10)
+    def __init__(self, nome, idade, salario, linguagem):
+        super().__init__(nome, idade, salario)
+        self.linguagem = linguagem
 
+    def calcular_bonus(self):
+        return self.salario * 0.12
 
 class Estagiario(Funcionario):
-    def __init__(self, nome, salario):
-        super().__init__(nome, salario, 7)
+    def __init__(self, nome, idade, salario, universidade):
+        super().__init__(nome, idade, salario)
+        self.universidade = universidade
+
+    def calcular_bonus(self):
+        return self.salario * 0.08
