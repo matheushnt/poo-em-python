@@ -10,8 +10,16 @@ class Usuario:
     def pagar(self, destino, valor, modalidade):
         if modalidade.upper() == 'BOLETO':
             boleto = PagamentoBoleto(destino, valor)
-            return f'Destino: {destino}, Valor: R${valor:.2f}, Vencimento: {boleto.vencimento()}, Numero: {
-                boleto.numero}'
+            return 'Origem: {}, Destino: {}, Valor: R${:.2f}, Emissão: {}, Vencimento: {}, Numero: {}'.format(
+                self.nome,
+                destino,
+                valor,
+                PagamentoBoleto.data_atual().strftime('%d/%m/%Y'),
+                boleto.vencimento(),
+                boleto.numero
+            )
+        elif modalidade.upper() == 'CARTÃO':
+            cartao = PagamentoCartao(destino, valor,)
 
 
 class Pagamento:
@@ -36,7 +44,13 @@ class PagamentoBoleto(Pagamento):
 
 
 class PagamentoCartao(Pagamento):
-    pass
+    def __init__(self, destino, valor, parcelas, titular, num, validade, codigo):
+        super().__init__(destino, valor)
+        self.parcelas = parcelas
+        self.titular = titular
+        self.num = num
+        self.validade = validade
+        self.codigo = codigo
 
 
 class PagamentoPix(Pagamento):
@@ -49,5 +63,7 @@ class PagamentoPix(Pagamento):
 
 if __name__ == '__main__':
     matheus = Usuario('Matheus')
+    kayk = Usuario('Kayk')
 
     print(matheus.pagar('Kayk', 100, 'Boleto'))
+    print(kayk.pagar('Matheus', 100, 'Boleto'))
