@@ -3,6 +3,9 @@ class Pagamento:
         self.destino = destino
         self.valor = valor
 
+    def verificar_comprovante(self):
+        return f"Destino: {self.destino}, Valor: {self.valor:.2f}"
+
 
 class PagamentoBoleto(Pagamento):
     def __init__(self, destino, valor, codigo_barras):
@@ -10,10 +13,7 @@ class PagamentoBoleto(Pagamento):
         self.codigo_barras = codigo_barras
 
     def processar_pagamento(self):
-        return 'Processando pagamento de R${:.2f} com boleto {}.'.format(
-            self.valor,
-            self.codigo_barras
-        )
+        return f'Processando pagamento de R${self.valor:.2f} com boleto {self.codigo_barras}.'
 
 
 class PagamentoCartao(Pagamento):
@@ -22,10 +22,7 @@ class PagamentoCartao(Pagamento):
         self.num = num
 
     def processar_pagamento(self):
-        return 'Processando pagamento de R${:.2f} com cartão {}.'.format(
-            self.valor,
-            self.num[-4:]
-        )
+        return f'Processando pagamento de R${self.valor:.2f} com cartão {self.num[-4:]}.'
 
 
 class PagamentoPix(Pagamento):
@@ -34,7 +31,4 @@ class PagamentoPix(Pagamento):
         self.chave_pix = chave_pix
 
     def processar_pagamento(self):
-        return 'Processando pagamento de R${:.2f} com chave {}.'.format(
-            self.valor,
-            self.chave_pix,
-        )
+        return f'Processando pagamento de R${self.valor:.2f} com chave {self.chave_pix}.'
